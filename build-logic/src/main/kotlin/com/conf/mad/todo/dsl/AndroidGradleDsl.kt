@@ -38,7 +38,7 @@ fun Project.setupAndroid() {
             isCoreLibraryDesugaringEnabled = true
         }
         dependencies {
-            add("coreLibraryDesugaring", libs.library("android.desugar.libs"))
+            add("coreLibraryDesugaring", libs.library("android-desugar-libs"))
         }
         testOptions {
             unitTests {

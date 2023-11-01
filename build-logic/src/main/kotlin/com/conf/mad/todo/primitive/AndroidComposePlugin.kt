@@ -20,18 +20,17 @@ class AndroidComposePlugin : Plugin<Project> {
             android {
                 buildFeatures.compose = true
                 composeOptions {
-                    kotlinCompilerExtensionVersion = libs.version("composeCompiler")
+                    kotlinCompilerExtensionVersion = libs.version("androidx-compose-compiler")
                 }
             }
             dependencies {
                 implementation(libs.library("androidx-core"))
                 implementationPlatform(libs.library("androidx-compose-bom"))
-                implementationPlatform(libs.library("androidx-compose-activity"))
+                implementation(libs.library("androidx-compose-activity"))
                 implementation(libs.library("androidx-compose-ui"))
                 implementation(libs.library("androidx-compose-ui-foundation"))
                 implementation(libs.library("androidx-compose-material3"))
-                implementation(libs.library("androidxLifecycleLifecycleRuntimeKtx"))
-                implementation(libs.library("androidxActivityActivityCompose"))
+                implementation(libs.library("androidx-lifecycle-runtime"))
                 debugImplementation(libs.library("androidx-compose-ui-tooling"))
                 debugImplementation(libs.library("androidx-compose-ui-test-manifest"))
             }
