@@ -31,7 +31,7 @@ gradlePlugin {
     plugins {
         // primitives
         register("androidApplication") {
-            id = "conf.mad.primitive.androidapplication"
+            id = "conf.mad.primitive.android.application"
             implementationClass = "com.conf.mad.todo.primitive.AndroidApplicationPlugin"
         }
         register("androidCompose") {
