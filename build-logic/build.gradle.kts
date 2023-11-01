@@ -12,7 +12,6 @@ repositories {
     gradlePluginPortal()
 }
 
-// If we use jvmToolchain, we need to install JDK 11
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = "17"
 
