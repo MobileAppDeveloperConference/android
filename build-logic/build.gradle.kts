@@ -42,6 +42,10 @@ gradlePlugin {
             id = "conf.mad.primitive.android.hilt"
             implementationClass = "com.conf.mad.todo.primitive.AndroidHiltPlugin"
         }
+        register("androidRoom") {
+            id = "conf.mad.primitive.android.room"
+            implementationClass = "com.conf.mad.todo.primitive.AndroidRoomPlugin"
+        }
         register("androidKotlin") {
             id = "conf.mad.primitive.android.kotlin"
             implementationClass = "com.conf.mad.todo.primitive.AndroidKotlinPlugin"
