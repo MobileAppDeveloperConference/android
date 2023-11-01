@@ -28,6 +28,7 @@ androidx-fragment = "1.6.1"
 androidx-hilt-navigation-compose = "1.0.0"
 androidx-lifecycle = "2.6.2"
 androidx-navigation = "2.7.4"
+androidx-room = "2.6.0"
 androidx-security = "1.1.0-alpha06"
 androidx-startup = "1.1.1"
 
@@ -92,6 +93,9 @@ androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", versio
 androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-navigation = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "androidx-navigation" }
+androidx-room = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
 androidx-security = { group = "androidx.security", name = "security-crypto", version.ref = "androidx-security" }
 androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidx-startup" }
 
