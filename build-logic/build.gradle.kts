@@ -29,5 +29,35 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        // primitives
+        register("androidApplication") {
+            id = "conf.mad.primitive.androidapplication"
+            implementationClass = "com.conf.mad.todo.primitive.AndroidApplicationPlugin"
+        }
+        register("androidCompose") {
+            id = "conf.mad.primitive.android.compose"
+            implementationClass = "com.conf.mad.todo.primitive.AndroidComposePlugin"
+        }
+        register("androidHilt") {
+            id = "conf.mad.primitive.android.hilt"
+            implementationClass = "com.conf.mad.todo.primitive.AndroidHiltPlugin"
+        }
+        register("androidKotlin") {
+            id = "conf.mad.primitive.android.kotlin"
+            implementationClass = "com.conf.mad.todo.primitive.AndroidKotlinPlugin"
+        }
+        register("android") {
+            id = "conf.mad.primitive.android"
+            implementationClass = "com.conf.mad.todo.primitive.AndroidPlugin"
+        }
+        register("kotlinSerialization") {
+            id = "conf.mad.primitive.kotlin.serialization"
+            implementationClass = "com.conf.mad.todo.primitive.KotlinSerializationPlugin"
+        }
+        // convention
+        register("androidFeature") {
+            id = "conf.mad.convention.android.feature"
+            implementationClass = "com.conf.mad.todo.convention.AndroidFeaturePlugin"
+        }
     }
 }
