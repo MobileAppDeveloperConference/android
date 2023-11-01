@@ -5,6 +5,7 @@ import com.conf.mad.todo.dsl.bundle
 import com.conf.mad.todo.dsl.debugImplementation
 import com.conf.mad.todo.dsl.implementation
 import com.conf.mad.todo.dsl.implementationPlatform
+import com.conf.mad.todo.dsl.kotlinOptions
 import com.conf.mad.todo.dsl.library
 import com.conf.mad.todo.dsl.libs
 import com.conf.mad.todo.dsl.testImplementation
@@ -17,12 +18,24 @@ import org.gradle.kotlin.dsl.dependencies
 class AndroidComposePlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
+            val projectPath = rootProject.file(".").absolutePath
             android {
                 buildFeatures.compose = true
                 composeOptions {
                     kotlinCompilerExtensionVersion = libs.version("androidx-compose-compiler")
                 }
+                kotlinOptions {
+                    freeCompilerArgs = freeCompilerArgs + listOf(
+                        "-P",
+                        "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$projectPath/report/compose-metrics"
+                    )
+                    freeCompilerArgs = freeCompilerArgs + listOf(
+                        "-P",
+                        "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$projectPath/report/compose-reports"
+                    )
+                }
             }
+
             dependencies {
                 implementation(libs.library("androidx-core"))
                 implementationPlatform(libs.library("androidx-compose-bom"))
