@@ -27,6 +27,8 @@ class TodoColors(
     onSurface10: Color,
     surfaceContainer: Color,
     onSurfaceContainer: Color,
+    surfaceContainerHigh: Color,
+    onSurfaceContainerHigh: Color,
     isLight: Boolean
 ) {
     var primary by mutableStateOf(primary)
@@ -57,6 +59,10 @@ class TodoColors(
         private set
     var onSurfaceContainer by mutableStateOf(onSurfaceContainer)
         private set
+    var surfaceContainerHigh by mutableStateOf(surfaceContainerHigh)
+        private set
+    var onSurfaceContainerHigh by mutableStateOf(onSurfaceContainerHigh)
+        private set
 
     var isLight by mutableStateOf(isLight)
 
@@ -75,6 +81,8 @@ class TodoColors(
         onSurface10,
         surfaceContainer,
         onSurfaceContainer,
+        surfaceContainerHigh,
+        onSurfaceContainerHigh,
         isLight
     )
 
@@ -93,6 +101,8 @@ class TodoColors(
         onSurface10 = other.onSurface10
         surfaceContainer = other.surfaceContainer
         onSurfaceContainer = other.onSurfaceContainer
+        surfaceContainerHigh = other.surfaceContainerHigh
+        onSurfaceContainerHigh = other.onSurfaceContainerHigh
         isLight = other.isLight
     }
 }
@@ -112,6 +122,8 @@ fun todoColors(
     onSurface10: Color = GrayFry,
     surfaceContainer: Color = GrayFry,
     onSurfaceContainer: Color = Black,
+    surfaceContainerHigh: Color = Black,
+    onSurfaceContainerHigh: Color = Snow,
     isLight: Boolean = true
 ): TodoColors {
     return TodoColors(
@@ -129,6 +141,8 @@ fun todoColors(
         onSurface10,
         surfaceContainer,
         onSurfaceContainer,
+        surfaceContainerHigh,
+        onSurfaceContainerHigh,
         isLight
     )
 }

@@ -20,5 +20,6 @@ include(
     ":app",
     ":core:designsystem",
     ":core:ui",
+    ":feature:home",
     ":feature:post"
 )
