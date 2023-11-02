@@ -15,13 +15,29 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
 import com.conf.mad.todo.designsystem.TodoTheme
 import com.conf.mad.todo.designsystem.preview.DevicePreview
 import com.conf.mad.todo.post.component.AddTaskTopAppBar
 import com.conf.mad.todo.post.component.TaskTextField
 
+const val POST_SCREEN_ROUTE = "post"
+
+fun NavGraphBuilder.postScreen(
+    onCancel: () -> Unit,
+    onComplete: () -> Unit
+) {
+    composable(POST_SCREEN_ROUTE) {
+        PostScreen(onCancel = onCancel, onComplete = onComplete)
+    }
+}
+
 @Composable
-fun PostScreen() {
+fun PostScreen(
+    onCancel: () -> Unit = {},
+    onComplete: () -> Unit = {},
+) {
     var isFavorite by remember {
         mutableStateOf(false)
     }
