@@ -68,7 +68,8 @@ internal fun HomeBottomAppBar(
                     colorFilter = ColorFilter.tint(TodoTheme.colors.primary)
                 )
             }
-        }
+        },
+        containerColor = TodoTheme.colors.surface,
     )
 }
 
