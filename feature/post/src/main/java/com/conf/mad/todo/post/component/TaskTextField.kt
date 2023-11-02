@@ -30,7 +30,7 @@ internal fun TaskTextField(
     value: String,
     onValueChange: (String) -> Unit,
     singleLine: Boolean = false,
-    isClearTextEnabled: Boolean = false,
+    useClearText: Boolean = false,
     onPressClearText: () -> Unit = {},
     placeHolder: String,
     modifier: Modifier = Modifier,
@@ -47,7 +47,7 @@ internal fun TaskTextField(
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(8.dp))
                     .background(TodoTheme.colors.surfaceContainer),
-                horizontalArrangement = if (isClearTextEnabled) {
+                horizontalArrangement = if (useClearText) {
                     Arrangement.SpaceBetween
                 } else {
                     Arrangement.Start
@@ -69,7 +69,7 @@ internal fun TaskTextField(
                             innerTextField()
                         }
                         Spacer(modifier = Modifier.width(8.dp))
-                        if (isClearTextEnabled) {
+                        if (useClearText) {
                             Image(
                                 painter = painterResource(id = CommonDrawable.ic_clear),
                                 contentDescription = "Clear Text",
@@ -94,7 +94,7 @@ private fun SingleLineTaskTextFieldPreview() {
             value = text,
             onValueChange = { text = it },
             singleLine = true,
-            isClearTextEnabled = true,
+            useClearText = true,
             placeHolder = "투두를 입력해주세요",
             onPressClearText = { text = "" }
         )
