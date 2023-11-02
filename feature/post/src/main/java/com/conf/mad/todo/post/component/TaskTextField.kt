@@ -64,18 +64,25 @@ internal fun TaskTextField(
                             style = TodoTheme.typography.regular1,
                             color = TodoTheme.colors.onSurface40,
                         )
-                    } else {
-                        Row(modifier = Modifier.weight(1f)) {
-                            innerTextField()
-                        }
-                        Spacer(modifier = Modifier.width(8.dp))
-                        if (useClearText) {
-                            Image(
-                                painter = painterResource(id = CommonDrawable.ic_clear),
-                                contentDescription = "Clear Text",
-                                modifier = Modifier.noRippleClickable(onClick = onPressClearText)
-                            )
-                        }
+                    }
+                    Row(
+                        modifier = Modifier.then(
+                            if (value.isBlank()) {
+                                Modifier.width(0.dp)
+                            } else {
+                                Modifier.weight(1f)
+                            }
+                        )
+                    ) {
+                        innerTextField()
+                    }
+                    Spacer(modifier = Modifier.width(8.dp))
+                    if (useClearText && value.isNotBlank()) {
+                        Image(
+                            painter = painterResource(id = CommonDrawable.ic_clear),
+                            contentDescription = "Clear Text",
+                            modifier = Modifier.noRippleClickable(onClick = onPressClearText)
+                        )
                     }
                 }
             }
