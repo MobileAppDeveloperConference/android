@@ -8,6 +8,9 @@ android {
     namespace = "com.conf.mad.todo.database"
 
     defaultConfig {
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
         consumerProguardFiles("consumer-rules.pro")
     }
 }
