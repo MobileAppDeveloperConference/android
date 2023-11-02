@@ -26,7 +26,7 @@ import com.conf.mad.todo.designsystem.preview.ComponentPreview
 import com.conf.mad.todo.ui.noRippleClickable
 
 @Composable
-fun TaskTextField(
+internal fun TaskTextField(
     value: String,
     onValueChange: (String) -> Unit,
     singleLine: Boolean = false,

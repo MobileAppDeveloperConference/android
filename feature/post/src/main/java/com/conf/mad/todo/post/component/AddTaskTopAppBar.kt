@@ -19,7 +19,7 @@ typealias CommonDrawable = com.conf.mad.todo.designsystem.R.drawable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddTaskTopAppBar(
+internal fun AddTaskTopAppBar(
     isFavorite: Boolean,
     isPostEnabled: Boolean,
     onPressFavorite: () -> Unit,
