@@ -15,6 +15,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
 import com.conf.mad.todo.designsystem.TodoTheme
 import com.conf.mad.todo.designsystem.preview.DevicePreview
 import com.conf.mad.todo.home.component.HomeBottomAppBar
@@ -22,6 +24,14 @@ import com.conf.mad.todo.home.component.HomeTopAppBar
 import com.conf.mad.todo.home.component.TaskItem
 import com.conf.mad.todo.home.model.HomeMenu
 import com.conf.mad.todo.home.model.TaskStatus
+
+const val HOME_SCREEN_ROUTE = "home"
+
+fun NavGraphBuilder.homeScreen() {
+    composable(HOME_SCREEN_ROUTE) {
+        HomeScreen()
+    }
+}
 
 @Composable
 fun HomeScreen(
