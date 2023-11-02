@@ -61,8 +61,8 @@ fun PostScreen(
                 isFavorite = isFavorite,
                 isPostEnabled = isPostEnabled,
                 onPressFavorite = { isFavorite = !isFavorite },
-                onCancel = { },
-                onComplete = { }
+                onCancel = onCancel,
+                onComplete = onComplete
             )
         }
     ) { paddingValues ->
