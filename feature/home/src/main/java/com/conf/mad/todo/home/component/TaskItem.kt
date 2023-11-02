@@ -31,7 +31,6 @@ internal fun TaskItem(
 ) {
     Row(
         modifier = modifier
-            .padding(16.dp)
             .background(color = TodoTheme.colors.surface),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
