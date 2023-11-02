@@ -18,18 +18,18 @@ import androidx.compose.ui.unit.dp
 import com.conf.mad.todo.designsystem.TodoTheme
 import com.conf.mad.todo.designsystem.preview.ComponentPreview
 import com.conf.mad.todo.home.R
-import com.conf.mad.todo.home.model.HomeRoute
+import com.conf.mad.todo.home.model.HomeMenu
 
 @Composable
 internal fun HomeBottomAppBar(
-    currentDestination: HomeRoute,
-    onNavigate: (HomeRoute) -> Unit
+    currentDestination: HomeMenu,
+    onMenuSelected: (HomeMenu) -> Unit
 ) {
     BottomAppBar(
         actions = {
             Image(
                 painter = painterResource(
-                    id = if (currentDestination == HomeRoute.TASK) {
+                    id = if (currentDestination == HomeMenu.TASK) {
                         R.drawable.ic_navi_task_selected
                     } else {
                         R.drawable.ic_navi_task_default
@@ -38,12 +38,12 @@ internal fun HomeBottomAppBar(
                 contentDescription = "Task List Button",
                 modifier = Modifier
                     .clip(RoundedCornerShape(24.dp))
-                    .clickable { onNavigate(HomeRoute.TASK) }
+                    .clickable { onMenuSelected(HomeMenu.TASK) }
                     .padding(12.dp)
             )
             Image(
                 painter = painterResource(
-                    id = if (currentDestination == HomeRoute.FAVORITE) {
+                    id = if (currentDestination == HomeMenu.FAVORITE) {
                         R.drawable.ic_navi_favorite_selected
                     } else {
                         R.drawable.ic_navi_favorite_default
@@ -52,13 +52,13 @@ internal fun HomeBottomAppBar(
                 contentDescription = "Task List Button",
                 modifier = Modifier
                     .clip(RoundedCornerShape(24.dp))
-                    .clickable { onNavigate(HomeRoute.FAVORITE) }
+                    .clickable { onMenuSelected(HomeMenu.FAVORITE) }
                     .padding(12.dp)
             )
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { onNavigate(HomeRoute.POST) },
+                onClick = { onMenuSelected(HomeMenu.POST) },
                 containerColor = TodoTheme.colors.onPrimary,
                 elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
             ) {
@@ -77,12 +77,12 @@ internal fun HomeBottomAppBar(
 @Composable
 private fun HomeBottomAppBarPreview() {
     val (currentDestination, onNavigate) = remember {
-        mutableStateOf(HomeRoute.TASK)
+        mutableStateOf(HomeMenu.TASK)
     }
     TodoTheme {
         HomeBottomAppBar(
             currentDestination = currentDestination,
-            onNavigate = onNavigate
+            onMenuSelected = onNavigate
         )
     }
 }

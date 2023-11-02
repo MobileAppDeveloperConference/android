@@ -20,19 +20,19 @@ import com.conf.mad.todo.designsystem.preview.DevicePreview
 import com.conf.mad.todo.home.component.HomeBottomAppBar
 import com.conf.mad.todo.home.component.HomeTopAppBar
 import com.conf.mad.todo.home.component.TaskItem
-import com.conf.mad.todo.home.model.HomeRoute
+import com.conf.mad.todo.home.model.HomeMenu
 import com.conf.mad.todo.home.model.TaskStatus
 
 @Composable
 fun HomeScreen(
-    todos: List<String>,
-    completedTasks: List<String>,
+    todos: List<String> = listOf(),
+    completedTasks: List<String> = listOf(),
 ) {
     val (isCompletedTaskVisible, onToggleCompletedTaskVisibility) = remember {
         mutableStateOf(true)
     }
-    val (currentDestination, onNavigate) = remember {
-        mutableStateOf(HomeRoute.TASK)
+    val (currentDestination, onMenuSelected) = remember {
+        mutableStateOf(HomeMenu.TASK)
     }
     Scaffold(
         modifier = Modifier
@@ -47,9 +47,9 @@ fun HomeScreen(
         bottomBar = {
             HomeBottomAppBar(
                 currentDestination = currentDestination,
-                onNavigate = {
-                    if (it != HomeRoute.POST) {
-                        onNavigate(it)
+                onMenuSelected = {
+                    if (it != HomeMenu.POST) {
+                        onMenuSelected(it)
                         return@HomeBottomAppBar
                     }
                     // TODO navigate to post screen
