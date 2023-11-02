@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.conf.mad.todo.designsystem.TodoTheme
 import com.conf.mad.todo.designsystem.preview.ComponentPreview
+import com.conf.mad.todo.ui.noRippleClickable
 
 typealias CommonDrawable = com.conf.mad.todo.designsystem.R.drawable
 
@@ -46,7 +47,7 @@ fun AddTaskTopAppBar(
                     ),
                     contentDescription = "Add Task Title",
                     modifier = Modifier
-                        .clickable(onClick = onPressFavorite)
+                        .noRippleClickable(onClick = onPressFavorite)
                         .padding(8.dp)
                 )
             }
@@ -57,7 +58,7 @@ fun AddTaskTopAppBar(
                 color = TodoTheme.colors.onSurface50,
                 style = TodoTheme.typography.medium1,
                 modifier = Modifier
-                    .clickable(onClick = onCancel)
+                    .noRippleClickable(onClick = onCancel)
                     .padding(16.dp)
             )
             Text(
@@ -71,7 +72,7 @@ fun AddTaskTopAppBar(
                 modifier = Modifier
                     .then(
                         if (isPostEnabled) {
-                            Modifier.clickable(onClick = onComplete)
+                            Modifier.noRippleClickable(onClick = onComplete)
                         } else {
                             Modifier
                         }
