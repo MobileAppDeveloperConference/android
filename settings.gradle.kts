@@ -20,6 +20,7 @@ include(
     ":app",
     ":core:designsystem",
     ":core:ui",
+    ":data:task",
     ":feature:home",
     ":feature:post"
 )
