@@ -21,6 +21,7 @@ typealias CommonDrawable = com.conf.mad.todo.designsystem.R.drawable
 @Composable
 fun AddTaskTopAppBar(
     isFavorite: Boolean,
+    isPostEnabled: Boolean,
     onPressFavorite: () -> Unit,
     onCancel: () -> Unit,
     onComplete: () -> Unit,
@@ -61,10 +62,20 @@ fun AddTaskTopAppBar(
             )
             Text(
                 text = "완료",
-                color = TodoTheme.colors.primary,
+                color = if (isPostEnabled) {
+                    TodoTheme.colors.primary
+                } else {
+                    TodoTheme.colors.onSurface50
+                },
                 style = TodoTheme.typography.medium1,
                 modifier = Modifier
-                    .clickable(onClick = onComplete)
+                    .then(
+                        if (isPostEnabled) {
+                            Modifier.clickable(onClick = onComplete)
+                        } else {
+                            Modifier
+                        }
+                    )
                     .padding(16.dp)
             )
         },
@@ -78,6 +89,7 @@ private fun TodoTopAppBarPreview() {
     TodoTheme {
         AddTaskTopAppBar(
             isFavorite = true,
+            isPostEnabled = true,
             onPressFavorite = {},
             onCancel = {},
             onComplete = {}
