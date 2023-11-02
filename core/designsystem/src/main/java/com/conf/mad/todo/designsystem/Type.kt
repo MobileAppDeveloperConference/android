@@ -76,7 +76,7 @@ fun TodoTypography(): TodoTypography {
         ),
         medium1 = TextStyle(
             fontFamily = PretendardMedium,
-            fontSize = 20.sp,
+            fontSize = 16.sp,
             lineHeight = 24.sp,
             fontWeight = FontWeight.Medium,
             letterSpacing = (-0.5).sp,
