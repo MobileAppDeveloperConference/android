@@ -16,4 +16,8 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "TodoMad"
-include(":app", ":core:designsystem", ":feature:post")
+include(
+    ":app",
+    ":core:designsystem",
+    ":feature:post"
+)
