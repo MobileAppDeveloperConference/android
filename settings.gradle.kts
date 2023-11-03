@@ -20,8 +20,9 @@ include(
     ":app",
     ":core:database",
     ":core:designsystem",
-    ":core:ui",
+    ":core:model",
     ":data:task",
+    ":core:ui",
     ":feature:home",
     ":feature:post"
 )
