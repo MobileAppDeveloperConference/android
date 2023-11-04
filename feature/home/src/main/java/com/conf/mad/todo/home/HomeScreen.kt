@@ -12,6 +12,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -20,6 +21,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.conf.mad.todo.designsystem.TodoTheme
 import com.conf.mad.todo.designsystem.preview.DevicePreview
+import com.conf.mad.todo.home.component.DeleteTaskDialog
 import com.conf.mad.todo.home.component.HomeBottomAppBar
 import com.conf.mad.todo.home.component.HomeTopAppBar
 import com.conf.mad.todo.home.component.TaskItem
@@ -47,8 +49,12 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val isDeleteDialogVisible = remember(uiState.taskToDelete) {
+        uiState.taskToDelete != null
+    }
     HomeScreen(
         isCompletedTaskVisible = uiState.isCompletedTaskVisible,
+        isDeleteDialogVisible = isDeleteDialogVisible,
         currentDestination = uiState.currentDestination,
         todos = uiState.todoTasks,
         completedTasks = uiState.completedTasks,
@@ -57,12 +63,16 @@ fun HomeScreen(
         onPost = onPost,
         onFavoriteChanged = viewModel::onFavoriteChanged,
         onCompletedChanged = viewModel::onCompletedChanged,
+        onSelectTaskToDelete = viewModel::onSelectTaskToDelete,
+        onDeleteDialogDismiss = viewModel::onDismissDeleteDialog,
+        onDeleteTask = viewModel::onDeleteTask
     )
 }
 
 @Composable
 fun HomeScreen(
     isCompletedTaskVisible: Boolean,
+    isDeleteDialogVisible: Boolean,
     currentDestination: HomeMenu,
     todos: ImmutableList<TaskUiModel>,
     completedTasks: ImmutableList<TaskUiModel>,
@@ -71,6 +81,9 @@ fun HomeScreen(
     onPost: () -> Unit,
     onFavoriteChanged: (Long, Boolean) -> Unit,
     onCompletedChanged: (Long, Boolean) -> Unit,
+    onSelectTaskToDelete: (task: TaskUiModel) -> Unit,
+    onDeleteDialogDismiss: () -> Unit,
+    onDeleteTask: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier
@@ -129,6 +142,7 @@ fun HomeScreen(
                             !todo.isFavorite
                         )
                     },
+                    onDeleteDialogShow = { onSelectTaskToDelete(todo) }
                 )
             }
             if (isCompletedTaskVisible) {
@@ -159,9 +173,16 @@ fun HomeScreen(
                                 !task.isFavorite
                             )
                         },
+                        onDeleteDialogShow = { onSelectTaskToDelete(task) }
                     )
                 }
             }
+        }
+        if (isDeleteDialogVisible) {
+            DeleteTaskDialog(
+                onDismissRequest = onDeleteDialogDismiss,
+                onConfirm = onDeleteTask
+            )
         }
     }
 }
@@ -204,6 +225,7 @@ private fun HomeScreenPreview() {
     TodoTheme {
         HomeScreen(
             isCompletedTaskVisible = true,
+            isDeleteDialogVisible = false,
             currentDestination = HomeMenu.POST,
             todos = todos,
             completedTasks = completedTasks,
@@ -212,6 +234,9 @@ private fun HomeScreenPreview() {
             onPost = {},
             onFavoriteChanged = { _, _ -> },
             onCompletedChanged = { _, _ -> },
+            onSelectTaskToDelete = {},
+            onDeleteDialogDismiss = {},
+            onDeleteTask = {}
         )
     }
 }

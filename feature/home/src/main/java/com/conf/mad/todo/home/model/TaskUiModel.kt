@@ -20,6 +20,14 @@ data class TaskUiModel(
         isFavorite = task.isFavorite
     )
 
+    fun asDomain() = Task(
+        id = id,
+        title = title,
+        description = description,
+        isFavorite = isFavorite,
+        isCompleted = isCompleted
+    )
+
     companion object {
         fun of(task: Task) = TaskUiModel(task)
     }
