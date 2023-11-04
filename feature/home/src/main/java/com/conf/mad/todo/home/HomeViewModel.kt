@@ -26,14 +26,25 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             combine(
                 repository.getTodoTasks(),
-                repository.getCompletedTasks()
-            ) { todoTasks, completedTasks ->
-                todoTasks to completedTasks
-            }.collect { (todos, completed) ->
+                repository.getCompletedTasks(),
+                uiState
+            ) { todoTasks, completedTasks, uiState ->
+                Triple(todoTasks, completedTasks, uiState)
+            }.collect { (todos, completed, uiState) ->
                 _uiState.update {
                     it.copy(
-                        todoTasks = todos.map(TaskUiModel::of).toPersistentList(),
-                        completedTasks = completed.map(TaskUiModel::of).toPersistentList()
+                        todoTasks = todos.filter { task ->
+                            if (!uiState.isOnlyFavoriteTaskVisible) {
+                                return@filter true
+                            }
+                            task.isFavorite
+                        }.map(TaskUiModel::of).toPersistentList(),
+                        completedTasks = completed.filter { task ->
+                            if (!uiState.isOnlyFavoriteTaskVisible) {
+                                return@filter true
+                            }
+                            task.isFavorite
+                        }.map(TaskUiModel::of).toPersistentList()
                     )
                 }
             }

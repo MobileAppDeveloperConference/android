@@ -79,7 +79,7 @@ fun HomeScreen(
         topBar = {
             HomeTopAppBar(
                 isCompletedTaskVisible = isCompletedTaskVisible,
-                onToggleCompletedTaskVisibility = { onToggleCompletedTaskVisibility() },
+                onToggleCompletedTaskVisibility = onToggleCompletedTaskVisibility,
             )
         },
         bottomBar = {
