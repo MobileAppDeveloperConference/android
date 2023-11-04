@@ -19,9 +19,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.conf.mad.todo.designsystem.SkyBlue
 import com.conf.mad.todo.designsystem.TodoTheme
 import com.conf.mad.todo.designsystem.preview.DevicePreview
 import com.conf.mad.todo.home.component.DeleteTaskDialog
+import com.conf.mad.todo.home.component.EmptyTaskView
 import com.conf.mad.todo.home.component.HomeBottomAppBar
 import com.conf.mad.todo.home.component.HomeTopAppBar
 import com.conf.mad.todo.home.component.TaskItem
@@ -124,6 +126,17 @@ fun HomeScreen(
                 )
                 Spacer(modifier = Modifier.height(12.dp))
             }
+            if (todos.isEmpty()) {
+                item(key = "empty todo view") {
+                    EmptyTaskView(
+                        modifier = Modifier
+                            .background(SkyBlue.copy(alpha = 0.2f))
+                            .fillMaxWidth()
+                            .padding(top = 20.dp)
+                            .height(128.dp)
+                    )
+                }
+            }
             items(todos, key = { it.id ?: UNDEFINED_ID }) { todo ->
                 TaskItem(
                     modifier = Modifier.fillMaxWidth(),
@@ -154,6 +167,17 @@ fun HomeScreen(
                         color = TodoTheme.colors.onBackground
                     )
                     Spacer(modifier = Modifier.height(12.dp))
+                }
+                if (completedTasks.isEmpty()) {
+                    item(key = "empty completed task view") {
+                        EmptyTaskView(
+                            modifier = Modifier
+                                .background(SkyBlue.copy(alpha = 0.2f))
+                                .fillMaxWidth()
+                                .padding(top = 20.dp)
+                                .height(128.dp)
+                        )
+                    }
                 }
                 items(completedTasks) { task ->
                     TaskItem(
