@@ -1,7 +1,9 @@
 package com.conf.mad.todo.home.component
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,6 +22,7 @@ import com.conf.mad.todo.home.R
 import com.conf.mad.todo.home.model.TaskStatus
 import com.conf.mad.todo.ui.noRippleClickable
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun TaskItem(
     modifier: Modifier = Modifier,
@@ -28,6 +31,7 @@ internal fun TaskItem(
     isFavorite: Boolean,
     onCompletedValueChange: () -> Unit,
     onFavoriteValueChange: () -> Unit,
+    onDeleteDialogShow: () -> Unit
 ) {
     Row(
         modifier = modifier
@@ -37,7 +41,10 @@ internal fun TaskItem(
     ) {
         Row(
             modifier = Modifier
-                .noRippleClickable(onClick = onCompletedValueChange),
+                .combinedClickable(
+                    onClick = onCompletedValueChange,
+                    onLongClick = onDeleteDialogShow
+                ).weight(1f),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
@@ -93,7 +100,8 @@ private fun TaskItemPreview() {
             status = TaskStatus.DONE,
             isFavorite = false,
             onCompletedValueChange = {},
-            onFavoriteValueChange = {}
+            onFavoriteValueChange = {},
+            onDeleteDialogShow = {}
         )
     }
 }

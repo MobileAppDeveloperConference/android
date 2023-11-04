@@ -25,7 +25,7 @@ class DefaultTaskRepository @Inject constructor(
     }
 
     override suspend fun deleteTask(task: Task) {
-        taskDao.insertTask(task.toEntity())
+        taskDao.deleteTask(task.toEntity())
     }
 
     override suspend fun updateFavorite(id: Long, isFavorite: Boolean) {

@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PostViewModel @Inject constructor(
-    private val repository: TaskRepository
+    private val repository: TaskRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(PostUiState())
     val uiState = _uiState.asStateFlow()
@@ -38,5 +38,8 @@ class PostViewModel @Inject constructor(
 
     fun onCreateNewTask() = viewModelScope.launch {
         repository.insertTask(uiState.value.asDomain())
+        _uiState.update {
+            it.copy(isSaved = true)
+        }
     }
 }

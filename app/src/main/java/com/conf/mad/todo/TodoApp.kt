@@ -8,6 +8,7 @@ import com.conf.mad.todo.designsystem.TodoTheme
 import com.conf.mad.todo.home.HOME_SCREEN_ROUTE
 import com.conf.mad.todo.home.homeScreen
 import com.conf.mad.todo.post.POST_SCREEN_ROUTE
+import com.conf.mad.todo.post.POST_SCREEN_TASK_DEFAULT_ID
 import com.conf.mad.todo.post.postScreen
 
 @Composable
@@ -19,8 +20,19 @@ fun TodoApp(
             navController = navController,
             startDestination = HOME_SCREEN_ROUTE
         ) {
-            homeScreen(onPost = { navController.navigate(POST_SCREEN_ROUTE) })
-            postScreen()
+            homeScreen(
+                onPost = {
+                    navController.navigate("${POST_SCREEN_ROUTE}/${POST_SCREEN_TASK_DEFAULT_ID}")
+                }
+            )
+            postScreen(
+                onCancel = { navController.popBackStack() },
+                onComplete = {
+                    navController.navigate(HOME_SCREEN_ROUTE) {
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
     }
 }

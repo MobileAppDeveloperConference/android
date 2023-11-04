@@ -74,4 +74,26 @@ class HomeViewModel @Inject constructor(
             repository.updateCompleted(id, isCompleted)
         }
     }
+
+    fun onSelectTaskToDelete(task: TaskUiModel) {
+        _uiState.update {
+            it.copy(taskToDelete = task)
+        }
+    }
+
+    fun onDeleteTask() {
+        viewModelScope.launch {
+            val task = uiState.value.taskToDelete ?: return@launch
+            repository.deleteTask(task.asDomain())
+            _uiState.update {
+                it.copy(taskToDelete = null)
+            }
+        }
+    }
+
+    fun onDismissDeleteDialog() {
+        _uiState.update {
+            it.copy(taskToDelete = null)
+        }
+    }
 }
