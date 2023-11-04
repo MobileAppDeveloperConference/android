@@ -10,6 +10,7 @@ val Pink = Color(0xFFFFD2D2)
 val Blue = Color(0xFF5182FF)
 val SkyBlue = Color(0xFFE2EFFF)
 val LightBlue = Color(0xFFF8FBFF)
+val AshBlue = Color(0xFFC9DBF0)
 
 // Gray Scale
 val Black = Color(0xFF000000)
