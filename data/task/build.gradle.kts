@@ -10,3 +10,8 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 }
+
+dependencies {
+    implementation(projects.core.database)
+    implementation(projects.core.model)
+}
