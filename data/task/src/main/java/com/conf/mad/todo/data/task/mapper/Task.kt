@@ -4,8 +4,9 @@ import com.conf.mad.todo.database.entity.TaskEntity
 import com.conf.mad.todo.task.model.Task
 
 fun TaskEntity.asDomain(): Task = Task(
-    id = id,
+    id = id ?: Task.UNDEFINED_ID,
     title = title,
+    description = description,
     isCompleted = isCompleted,
     isFavorite = isFavorite
 )
