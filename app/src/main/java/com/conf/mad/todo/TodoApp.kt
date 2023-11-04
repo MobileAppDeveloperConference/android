@@ -16,10 +16,7 @@ fun TodoApp(
     TodoTheme {
         NavHost(navController = navController, startDestination = HOME_SCREEN_ROUTE) {
             homeScreen()
-            postScreen(
-                onCancel = navController::popBackStack,
-                onComplete = navController::popBackStack
-            )
+            postScreen()
         }
     }
 }

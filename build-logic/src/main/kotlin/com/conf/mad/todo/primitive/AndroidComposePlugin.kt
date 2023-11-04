@@ -41,6 +41,7 @@ class AndroidComposePlugin : Plugin<Project> {
                 implementationPlatform(libs.library("androidx-compose-bom"))
                 implementation(libs.library("androidx-compose-activity"))
                 implementation(libs.library("androidx-compose-hilt-navigation"))
+                implementation(libs.library("androidx-compose-lifecycle"))
                 implementation(libs.library("androidx-compose-navigation"))
                 implementation(libs.library("androidx-compose-ui"))
                 implementation(libs.library("androidx-compose-ui-foundation"))
