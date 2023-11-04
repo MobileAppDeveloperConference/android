@@ -37,7 +37,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.database)
     implementation(projects.core.designsystem)
+    implementation(projects.`data`.task)
     implementation(projects.feature.home)
     implementation(projects.feature.post)
     testImplementation(libs.junit)
