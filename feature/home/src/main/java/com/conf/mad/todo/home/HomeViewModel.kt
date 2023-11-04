@@ -1,6 +1,5 @@
 package com.conf.mad.todo.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.conf.mad.todo.home.model.HomeMenu
