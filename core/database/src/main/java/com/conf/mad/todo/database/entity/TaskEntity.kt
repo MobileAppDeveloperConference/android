@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class TaskEntity(
     @PrimaryKey(autoGenerate = true) val id: Long,
-    var title: String,
-    @ColumnInfo("is_completed") var isCompleted: Boolean = false,
-    @ColumnInfo("is_favorite") var isFavorite: Boolean = false,
+    val title: String,
+    @ColumnInfo("is_completed") val isCompleted: Boolean = false,
+    @ColumnInfo("is_favorite") val isFavorite: Boolean = false,
 )
