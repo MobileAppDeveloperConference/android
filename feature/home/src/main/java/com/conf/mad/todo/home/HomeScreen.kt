@@ -25,7 +25,7 @@ import com.conf.mad.todo.home.component.HomeTopAppBar
 import com.conf.mad.todo.home.component.TaskItem
 import com.conf.mad.todo.home.model.HomeMenu
 import com.conf.mad.todo.home.model.TaskStatus
-import com.conf.mad.todo.task.model.Task
+import com.conf.mad.todo.home.model.TaskUiModel
 import com.conf.mad.todo.task.model.Task.Companion.UNDEFINED_ID
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.PersistentList
@@ -64,8 +64,8 @@ fun HomeScreen(
 fun HomeScreen(
     isCompletedTaskVisible: Boolean,
     currentDestination: HomeMenu,
-    todos: ImmutableList<Task>,
-    completedTasks: ImmutableList<Task>,
+    todos: ImmutableList<TaskUiModel>,
+    completedTasks: ImmutableList<TaskUiModel>,
     onToggleCompletedTaskVisibility: () -> Unit,
     onMenuSelected: (HomeMenu) -> Unit,
     onPost: () -> Unit,
@@ -169,35 +169,35 @@ fun HomeScreen(
 @DevicePreview
 @Composable
 private fun HomeScreenPreview() {
-    val todos: PersistentList<Task> = persistentListOf(
-        Task(
+    val todos: PersistentList<TaskUiModel> = persistentListOf(
+        TaskUiModel(
             title = "투두투두투두투",
             description = "",
             isFavorite = true,
-            isCompleted = false,
+            status = TaskStatus.TODO,
             id = 0,
         ),
-        Task(
+        TaskUiModel(
             title = "투두투두투두투",
             description = "",
             isFavorite = true,
-            isCompleted = false,
+            status = TaskStatus.DONE,
             id = 1,
         ),
     )
-    val completedTasks: PersistentList<Task> = persistentListOf(
-        Task(
+    val completedTasks: PersistentList<TaskUiModel> = persistentListOf(
+        TaskUiModel(
             title = "투두투두투두투",
             description = "",
             isFavorite = true,
-            isCompleted = false,
+            status = TaskStatus.COMPLETED,
             id = 2,
         ),
-        Task(
+        TaskUiModel(
             title = "투두투두투두투",
             description = "",
             isFavorite = true,
-            isCompleted = false,
+            status = TaskStatus.COMPLETED,
             id = 3,
         ),
     )

@@ -7,6 +7,6 @@ import kotlinx.collections.immutable.persistentListOf
 data class HomeUiState(
     val isCompletedTaskVisible: Boolean = true,
     val currentDestination: HomeMenu = HomeMenu.TASK,
-    val todoTasks: ImmutableList<Task> = persistentListOf(),
-    val completedTasks: ImmutableList<Task> = persistentListOf()
+    val todoTasks: ImmutableList<TaskUiModel> = persistentListOf(),
+    val completedTasks: ImmutableList<TaskUiModel> = persistentListOf()
 )

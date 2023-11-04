@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.conf.mad.todo.home.model.HomeMenu
 import com.conf.mad.todo.home.model.HomeUiState
+import com.conf.mad.todo.home.model.TaskUiModel
 import com.conf.mad.todo.task.repository.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toPersistentList
@@ -31,8 +32,8 @@ class HomeViewModel @Inject constructor(
             }.collect { (todos, completed) ->
                 _uiState.update {
                     it.copy(
-                        todoTasks = todos.toPersistentList(),
-                        completedTasks = completed.toPersistentList()
+                        todoTasks = todos.map(TaskUiModel::of).toPersistentList(),
+                        completedTasks = completed.map(TaskUiModel::of).toPersistentList()
                     )
                 }
             }
