@@ -24,7 +24,7 @@ import com.conf.mad.todo.designsystem.TodoTheme
 import com.conf.mad.todo.designsystem.preview.DevicePreview
 
 @Composable
-fun DeleteTaskDialog(
+internal fun DeleteTaskDialog(
     onDismissRequest: () -> Unit,
     onConfirm: () -> Unit
 ) {
