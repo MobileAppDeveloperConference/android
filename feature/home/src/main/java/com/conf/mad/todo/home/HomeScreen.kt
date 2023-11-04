@@ -141,7 +141,7 @@ fun HomeScreen(
                 TaskItem(
                     modifier = Modifier.fillMaxWidth(),
                     title = todo.title,
-                    status = TaskStatus.TODO,
+                    status = todo.status,
                     isFavorite = todo.isFavorite,
                     onCompletedValueChange = {
                         onCompletedChanged(
@@ -183,7 +183,7 @@ fun HomeScreen(
                     TaskItem(
                         modifier = Modifier.fillMaxWidth(),
                         title = task.title,
-                        status = TaskStatus.COMPLETED,
+                        status = task.status,
                         isFavorite = task.isFavorite,
                         onCompletedValueChange = {
                             onCompletedChanged(

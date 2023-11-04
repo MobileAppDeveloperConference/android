@@ -8,7 +8,8 @@ data class HomeUiState(
     val currentDestination: HomeMenu = HomeMenu.TASK,
     val taskToDelete: TaskUiModel? = null,
     val todoTasks: ImmutableList<TaskUiModel> = persistentListOf(),
-    val completedTasks: ImmutableList<TaskUiModel> = persistentListOf()
+    val completedTasks: ImmutableList<TaskUiModel> = persistentListOf(),
+    val doneTasks: ImmutableList<TaskUiModel> = persistentListOf()
 ) {
     val isOnlyFavoriteTaskVisible
         get() = currentDestination == HomeMenu.FAVORITE
