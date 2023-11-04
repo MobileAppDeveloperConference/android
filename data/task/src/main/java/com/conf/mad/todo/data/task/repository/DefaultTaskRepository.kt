@@ -1,4 +1,4 @@
-package com.conf.mad.todo.data.task.datasource
+package com.conf.mad.todo.data.task.repository
 
 import com.conf.mad.todo.data.task.mapper.asDomain
 import com.conf.mad.todo.data.task.mapper.toEntity
@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class DefaultTaskLocalDataSource @Inject constructor(
+class DefaultTaskRepository @Inject constructor(
     private val taskDao: TaskDao
-) : TaskLocalDataSource {
+) : TaskRepository {
     override fun getTodoTasks(): Flow<List<Task>> {
         return taskDao.getTodoTasks().map { it.asDomain() }
     }
