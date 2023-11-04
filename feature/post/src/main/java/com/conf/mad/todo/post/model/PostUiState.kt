@@ -5,7 +5,8 @@ import com.conf.mad.todo.task.model.Task
 data class PostUiState(
     val title: String = "",
     val description: String = "",
-    val isFavorite: Boolean = false
+    val isFavorite: Boolean = false,
+    val isSaved: Boolean = false
 ) {
     fun asDomain() = Task(
         title = title,
