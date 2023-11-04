@@ -1,6 +1,6 @@
-package com.conf.mad.todo.data.task.repository
+package com.conf.mad.todo.task.repository
 
-import com.conf.mad.todo.model.Task
+import com.conf.mad.todo.task.model.Task
 import kotlinx.coroutines.flow.Flow
 
 interface TaskRepository {
