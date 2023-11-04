@@ -21,8 +21,9 @@ include(
     ":core:database",
     ":core:designsystem",
     ":core:model",
-    ":data:task",
     ":core:ui",
+    ":data:task",
+    ":domain:task",
     ":feature:home",
     ":feature:post"
 )
