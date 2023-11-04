@@ -63,5 +63,9 @@ gradlePlugin {
             id = "conf.mad.convention.android.feature"
             implementationClass = "com.conf.mad.todo.convention.AndroidFeaturePlugin"
         }
+        register("pureKotlin") {
+            id = "conf.mad.convention.kotlin"
+            implementationClass = "com.conf.mad.todo.convention.PureKotlinPlugin"
+        }
     }
 }

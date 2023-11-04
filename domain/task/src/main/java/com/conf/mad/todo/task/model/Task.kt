@@ -1,4 +1,4 @@
-package com.conf.mad.todo.model
+package com.conf.mad.todo.task.model
 
 data class Task(
     val id: Long,

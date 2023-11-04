@@ -1,7 +1,7 @@
 package com.conf.mad.todo.data.task.mapper
 
 import com.conf.mad.todo.database.entity.TaskEntity
-import com.conf.mad.todo.model.Task
+import com.conf.mad.todo.task.model.Task
 
 fun TaskEntity.asDomain(): Task = Task(
     id = id,

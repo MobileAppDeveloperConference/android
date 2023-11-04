@@ -3,7 +3,8 @@ package com.conf.mad.todo.data.task.repository
 import com.conf.mad.todo.data.task.mapper.asDomain
 import com.conf.mad.todo.data.task.mapper.toEntity
 import com.conf.mad.todo.database.TaskDao
-import com.conf.mad.todo.model.Task
+import com.conf.mad.todo.task.model.Task
+import com.conf.mad.todo.task.repository.TaskRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
