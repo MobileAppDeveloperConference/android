@@ -12,6 +12,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.common)
     implementation(projects.core.database)
     implementation(projects.domain.task)
 }

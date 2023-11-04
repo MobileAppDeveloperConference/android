@@ -18,6 +18,7 @@ dependencyResolutionManagement {
 rootProject.name = "TodoMad"
 include(
     ":app",
+    ":core:common",
     ":core:database",
     ":core:designsystem",
     ":core:ui",
