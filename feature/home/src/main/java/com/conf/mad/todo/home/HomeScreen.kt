@@ -11,10 +11,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.conf.mad.todo.designsystem.TodoTheme
@@ -24,26 +25,53 @@ import com.conf.mad.todo.home.component.HomeTopAppBar
 import com.conf.mad.todo.home.component.TaskItem
 import com.conf.mad.todo.home.model.HomeMenu
 import com.conf.mad.todo.home.model.TaskStatus
+import com.conf.mad.todo.home.model.TaskUiModel
+import com.conf.mad.todo.task.model.Task.Companion.UNDEFINED_ID
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 
 const val HOME_SCREEN_ROUTE = "home"
 
-fun NavGraphBuilder.homeScreen() {
+fun NavGraphBuilder.homeScreen(
+    onPost: () -> Unit
+) {
     composable(HOME_SCREEN_ROUTE) {
-        HomeScreen()
+        HomeScreen(onPost = onPost)
     }
 }
 
 @Composable
 fun HomeScreen(
-    todos: List<String> = listOf(),
-    completedTasks: List<String> = listOf(),
+    onPost: () -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val (isCompletedTaskVisible, onToggleCompletedTaskVisibility) = remember {
-        mutableStateOf(true)
-    }
-    val (currentDestination, onMenuSelected) = remember {
-        mutableStateOf(HomeMenu.TASK)
-    }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    HomeScreen(
+        isCompletedTaskVisible = uiState.isCompletedTaskVisible,
+        currentDestination = uiState.currentDestination,
+        todos = uiState.todoTasks,
+        completedTasks = uiState.completedTasks,
+        onToggleCompletedTaskVisibility = viewModel::onToggleCompletedTaskVisibility,
+        onMenuSelected = viewModel::onTaskChanged,
+        onPost = onPost,
+        onFavoriteChanged = viewModel::onFavoriteChanged,
+        onCompletedChanged = viewModel::onCompletedChanged,
+    )
+}
+
+@Composable
+fun HomeScreen(
+    isCompletedTaskVisible: Boolean,
+    currentDestination: HomeMenu,
+    todos: ImmutableList<TaskUiModel>,
+    completedTasks: ImmutableList<TaskUiModel>,
+    onToggleCompletedTaskVisibility: () -> Unit,
+    onMenuSelected: (HomeMenu) -> Unit,
+    onPost: () -> Unit,
+    onFavoriteChanged: (Long, Boolean) -> Unit,
+    onCompletedChanged: (Long, Boolean) -> Unit,
+) {
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -51,7 +79,7 @@ fun HomeScreen(
         topBar = {
             HomeTopAppBar(
                 isCompletedTaskVisible = isCompletedTaskVisible,
-                onToggleCompletedTaskVisibility = { onToggleCompletedTaskVisibility(!isCompletedTaskVisible) },
+                onToggleCompletedTaskVisibility = onToggleCompletedTaskVisibility,
             )
         },
         bottomBar = {
@@ -62,7 +90,7 @@ fun HomeScreen(
                         onMenuSelected(it)
                         return@HomeBottomAppBar
                     }
-                    // TODO navigate to post screen
+                    onPost()
                 }
             )
         }
@@ -83,34 +111,56 @@ fun HomeScreen(
                 )
                 Spacer(modifier = Modifier.height(12.dp))
             }
-            items(todos) { todo ->
+            items(todos, key = { it.id ?: UNDEFINED_ID }) { todo ->
                 TaskItem(
                     modifier = Modifier.fillMaxWidth(),
-                    title = todo,
+                    title = todo.title,
                     status = TaskStatus.TODO,
-                    isFavorite = false,
-                    onCompletedValueChange = { },
-                    onFavoriteValueChange = { },
+                    isFavorite = todo.isFavorite,
+                    onCompletedValueChange = {
+                        onCompletedChanged(
+                            todo.id ?: UNDEFINED_ID,
+                            !todo.isCompleted
+                        )
+                    },
+                    onFavoriteValueChange = {
+                        onFavoriteChanged(
+                            todo.id ?: UNDEFINED_ID,
+                            !todo.isFavorite
+                        )
+                    },
                 )
             }
-            item(key = "complete title") {
-                Spacer(modifier = Modifier.height(36.dp))
-                Text(
-                    text = "완료",
-                    style = TodoTheme.typography.semiBold,
-                    color = TodoTheme.colors.onBackground
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-            }
-            items(completedTasks) { task ->
-                TaskItem(
-                    modifier = Modifier.fillMaxWidth(),
-                    title = task,
-                    status = TaskStatus.COMPLETED,
-                    isFavorite = false,
-                    onCompletedValueChange = { },
-                    onFavoriteValueChange = { },
-                )
+            if (isCompletedTaskVisible) {
+                item(key = "complete title") {
+                    Spacer(modifier = Modifier.height(36.dp))
+                    Text(
+                        text = "완료",
+                        style = TodoTheme.typography.semiBold,
+                        color = TodoTheme.colors.onBackground
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                }
+                items(completedTasks) { task ->
+                    TaskItem(
+                        modifier = Modifier.fillMaxWidth(),
+                        title = task.title,
+                        status = TaskStatus.COMPLETED,
+                        isFavorite = task.isFavorite,
+                        onCompletedValueChange = {
+                            onCompletedChanged(
+                                task.id ?: UNDEFINED_ID,
+                                !task.isCompleted
+                            )
+                        },
+                        onFavoriteValueChange = {
+                            onFavoriteChanged(
+                                task.id ?: UNDEFINED_ID,
+                                !task.isFavorite
+                            )
+                        },
+                    )
+                }
             }
         }
     }
@@ -119,12 +169,49 @@ fun HomeScreen(
 @DevicePreview
 @Composable
 private fun HomeScreenPreview() {
-    val todos = listOf("투두투두투", "두투두투두투", "투두투두투두")
-    val completedTasks = listOf("완료투두투두투", "완료두투두투두투", "완료투두투두투두투")
+    val todos: PersistentList<TaskUiModel> = persistentListOf(
+        TaskUiModel(
+            title = "투두투두투두투",
+            description = "",
+            isFavorite = true,
+            status = TaskStatus.TODO,
+            id = 0,
+        ),
+        TaskUiModel(
+            title = "투두투두투두투",
+            description = "",
+            isFavorite = true,
+            status = TaskStatus.DONE,
+            id = 1,
+        ),
+    )
+    val completedTasks: PersistentList<TaskUiModel> = persistentListOf(
+        TaskUiModel(
+            title = "투두투두투두투",
+            description = "",
+            isFavorite = true,
+            status = TaskStatus.COMPLETED,
+            id = 2,
+        ),
+        TaskUiModel(
+            title = "투두투두투두투",
+            description = "",
+            isFavorite = true,
+            status = TaskStatus.COMPLETED,
+            id = 3,
+        ),
+    )
     TodoTheme {
         HomeScreen(
+            isCompletedTaskVisible = true,
+            currentDestination = HomeMenu.POST,
             todos = todos,
-            completedTasks = completedTasks
+            completedTasks = completedTasks,
+            onToggleCompletedTaskVisibility = {},
+            onMenuSelected = {},
+            onPost = {},
+            onFavoriteChanged = { _, _ -> },
+            onCompletedChanged = { _, _ -> },
         )
     }
 }

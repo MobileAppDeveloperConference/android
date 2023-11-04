@@ -1,7 +1,7 @@
 package com.conf.mad.todo.task.model
 
 data class Task(
-    val id: Long = -1,
+    val id: Long? = null,
     val title: String,
     val description: String,
     val isCompleted: Boolean = false,
