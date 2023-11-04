@@ -15,10 +15,11 @@ fun TodoApp(
     navController: NavHostController = rememberNavController()
 ) {
     TodoTheme {
-        NavHost(navController = navController, startDestination = HOME_SCREEN_ROUTE) {
-            homeScreen(
-                onPost = { navController.navigate(POST_SCREEN_ROUTE) }
-            )
+        NavHost(
+            navController = navController,
+            startDestination = HOME_SCREEN_ROUTE
+        ) {
+            homeScreen(onPost = { navController.navigate(POST_SCREEN_ROUTE) })
             postScreen()
         }
     }
