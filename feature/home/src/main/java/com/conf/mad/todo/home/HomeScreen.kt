@@ -1,3 +1,25 @@
+/*
+ * MIT License
+ * Copyright 2023 MADConference
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.conf.mad.todo.home
 
 import androidx.compose.foundation.background
@@ -37,19 +59,14 @@ import kotlinx.collections.immutable.persistentListOf
 
 const val HOME_SCREEN_ROUTE = "home"
 
-fun NavGraphBuilder.homeScreen(
-    onPost: () -> Unit
-) {
+fun NavGraphBuilder.homeScreen(onPost: () -> Unit) {
     composable(HOME_SCREEN_ROUTE) {
         HomeScreen(onPost = onPost)
     }
 }
 
 @Composable
-fun HomeScreen(
-    onPost: () -> Unit,
-    viewModel: HomeViewModel = hiltViewModel()
-) {
+fun HomeScreen(onPost: () -> Unit, viewModel: HomeViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val isDeleteDialogVisible = remember(uiState.taskToDelete) {
         uiState.taskToDelete != null
@@ -94,7 +111,7 @@ fun HomeScreen(
         topBar = {
             HomeTopAppBar(
                 isCompletedTaskVisible = isCompletedTaskVisible,
-                onToggleCompletedTaskVisibility = onToggleCompletedTaskVisibility,
+                onToggleCompletedTaskVisibility = onToggleCompletedTaskVisibility
             )
         },
         bottomBar = {
@@ -220,15 +237,15 @@ private fun HomeScreenPreview() {
             description = "",
             isFavorite = true,
             status = TaskStatus.TODO,
-            id = 0,
+            id = 0
         ),
         TaskUiModel(
             title = "투두투두투두투",
             description = "",
             isFavorite = true,
             status = TaskStatus.DONE,
-            id = 1,
-        ),
+            id = 1
+        )
     )
     val completedTasks: PersistentList<TaskUiModel> = persistentListOf(
         TaskUiModel(
@@ -236,15 +253,15 @@ private fun HomeScreenPreview() {
             description = "",
             isFavorite = true,
             status = TaskStatus.COMPLETED,
-            id = 2,
+            id = 2
         ),
         TaskUiModel(
             title = "투두투두투두투",
             description = "",
             isFavorite = true,
             status = TaskStatus.COMPLETED,
-            id = 3,
-        ),
+            id = 3
+        )
     )
     TodoTheme {
         HomeScreen(
