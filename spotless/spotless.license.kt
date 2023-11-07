@@ -1,6 +1,6 @@
 /*
  * MIT License
- * Copyright 2023 MADConference
+ * Copyright $YEAR MADConference
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,3 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
-plugins {
-    id("conf.mad.convention.kotlin")
-}
