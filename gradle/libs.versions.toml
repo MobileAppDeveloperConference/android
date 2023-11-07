@@ -38,6 +38,7 @@ dagger-hilt = "2.48.1"
 accompanist = "0.32.0"
 material = "1.10.0"
 oss = "17.0.1"
+spotless = "6.22.0"
 
 # test
 junit = "4.13.2"
@@ -137,6 +138,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5-plugin" }
 oss = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "ossp" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 
 [bundles]
 compose-implementation = ["androidx-compose-ui", "androidx-compose-ui-foundation", "androidx-compose-ui-graphics", "androidx-compose-lifecycle", "androidx-compose-ui-tooling", "androidx-compose-ui-tooling-preview", "androidx-compose-material3"]
