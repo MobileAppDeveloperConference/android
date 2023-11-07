@@ -20,6 +20,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 package com.conf.mad.todo.post
 
 import androidx.compose.foundation.background
@@ -33,7 +35,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -46,6 +50,7 @@ import com.conf.mad.todo.designsystem.preview.DevicePreview
 import com.conf.mad.todo.post.component.AddTaskTopAppBar
 import com.conf.mad.todo.post.component.TaskTextField
 import com.conf.mad.todo.task.model.Task
+import com.conf.mad.todo.ui.noRippleClickable
 
 const val POST_SCREEN_ROUTE = "post"
 const val POST_SCREEN_TASK_ID_ARGS = "id"
@@ -70,6 +75,7 @@ fun PostScreen(
     viewModel: PostViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val focusManager = LocalFocusManager.current
     PostScreen(
         title = uiState.title,
         description = uiState.description,
@@ -78,7 +84,8 @@ fun PostScreen(
         onCancel = onCancel,
         onComplete = viewModel::onCreateNewTask,
         onTitleChanged = viewModel::onTitleChanged,
-        onDescriptionChanged = viewModel::onDescriptionChanged
+        onDescriptionChanged = viewModel::onDescriptionChanged,
+        onKeyboardHide = { focusManager.clearFocus() }
     )
     LaunchedEffect(uiState.isSaved) {
         if (uiState.isSaved) {
@@ -96,7 +103,8 @@ fun PostScreen(
     onCancel: () -> Unit,
     onComplete: () -> Unit,
     onTitleChanged: (String) -> Unit,
-    onDescriptionChanged: (String) -> Unit
+    onDescriptionChanged: (String) -> Unit,
+    onKeyboardHide: () -> Unit = {}
 ) {
     val isPostEnabled = remember(title) {
         title.isNotBlank()
@@ -104,14 +112,21 @@ fun PostScreen(
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(TodoTheme.colors.surface),
+            .background(TodoTheme.colors.surface)
+            .noRippleClickable(onKeyboardHide),
         topBar = {
             AddTaskTopAppBar(
                 isFavorite = isFavorite,
                 isPostEnabled = isPostEnabled,
                 onPressFavorite = onFavoritePressed,
-                onCancel = onCancel,
-                onComplete = onComplete
+                onCancel = {
+                    onKeyboardHide()
+                    onCancel()
+                },
+                onComplete = {
+                    onKeyboardHide()
+                    onComplete()
+                }
             )
         }
     ) { paddingValues ->
