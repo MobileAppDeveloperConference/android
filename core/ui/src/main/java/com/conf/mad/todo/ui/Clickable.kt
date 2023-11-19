@@ -43,10 +43,7 @@ inline fun Modifier.noRippleClickable(crossinline onClick: () -> Unit): Modifier
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-inline fun Modifier.noRippleCombinedClickable(
-    noinline onClick: () -> Unit,
-    noinline onLongClick: () -> Unit
-): Modifier = composed {
+inline fun Modifier.noRippleCombinedClickable(noinline onClick: () -> Unit, noinline onLongClick: () -> Unit): Modifier = composed {
     this.combinedClickable(
         onClick = onClick,
         onLongClick = onLongClick,

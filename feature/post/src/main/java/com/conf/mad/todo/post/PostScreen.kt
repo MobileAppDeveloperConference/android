@@ -69,11 +69,7 @@ fun NavGraphBuilder.postScreen(onCancel: () -> Unit, onComplete: () -> Unit) {
 }
 
 @Composable
-fun PostScreen(
-    onCancel: () -> Unit,
-    onComplete: () -> Unit,
-    viewModel: PostViewModel = hiltViewModel()
-) {
+fun PostScreen(onCancel: () -> Unit, onComplete: () -> Unit, viewModel: PostViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
     PostScreen(

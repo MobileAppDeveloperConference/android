@@ -182,11 +182,7 @@ object TodoTheme {
 }
 
 @Composable
-fun ProvideTodoColorAndTypography(
-    colors: TodoColors,
-    typography: TodoTypography,
-    content: @Composable () -> Unit
-) {
+fun ProvideTodoColorAndTypography(colors: TodoColors, typography: TodoTypography, content: @Composable () -> Unit) {
     val provideColors = remember { colors.copy() }
     provideColors.update(colors)
     val provideTypography = remember { typography.copy() }

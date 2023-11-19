@@ -38,10 +38,9 @@ import javax.inject.Singleton
 object DatabaseModule {
     @Provides
     @Singleton
-    fun provideTodoDatabase(@ApplicationContext context: Context): TodoDatabase =
-        Room.databaseBuilder(context, TodoDatabase::class.java, "todo.db")
-            .fallbackToDestructiveMigration()
-            .build()
+    fun provideTodoDatabase(@ApplicationContext context: Context): TodoDatabase = Room.databaseBuilder(context, TodoDatabase::class.java, "todo.db")
+        .fallbackToDestructiveMigration()
+        .build()
 
     @Provides
     @Singleton
