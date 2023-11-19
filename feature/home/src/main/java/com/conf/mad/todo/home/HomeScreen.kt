@@ -71,21 +71,128 @@ fun HomeScreen(onPost: () -> Unit, viewModel: HomeViewModel = hiltViewModel()) {
     val isDeleteDialogVisible = remember(uiState.taskToDelete) {
         uiState.taskToDelete != null
     }
-    HomeScreen(
-        isCompletedTaskVisible = uiState.isCompletedTaskVisible,
-        isDeleteDialogVisible = isDeleteDialogVisible,
-        currentDestination = uiState.currentDestination,
-        todos = uiState.todoTasks,
-        completedTasks = uiState.completedTasks,
-        onToggleCompletedTaskVisibility = viewModel::onToggleCompletedTaskVisibility,
-        onMenuSelected = viewModel::onTaskChanged,
-        onPost = onPost,
-        onFavoriteChanged = viewModel::onFavoriteChanged,
-        onCompletedChanged = viewModel::onCompletedChanged,
-        onSelectTaskToDelete = viewModel::onSelectTaskToDelete,
-        onDeleteDialogDismiss = viewModel::onDismissDeleteDialog,
-        onDeleteTask = viewModel::onDeleteTask
-    )
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(TodoTheme.colors.background),
+        topBar = {
+            HomeTopAppBar(
+                isCompletedTaskVisible = uiState.isCompletedTaskVisible,
+                onToggleCompletedTaskVisibility = viewModel::onToggleCompletedTaskVisibility
+            )
+        },
+        bottomBar = {
+            HomeBottomAppBar(
+                currentDestination = uiState.currentDestination,
+                onMenuSelected = {
+                    if (it != HomeMenu.POST) {
+                        viewModel.onTaskChanged(it)
+                        return@HomeBottomAppBar
+                    }
+                    onPost()
+                }
+            )
+        }
+    ) { paddingValues ->
+        LazyColumn(
+            modifier = Modifier.padding(
+                top = paddingValues.calculateTopPadding(),
+                bottom = paddingValues.calculateBottomPadding(),
+                start = 16.dp,
+                end = 16.dp
+            )
+        ) {
+            item(key = "todo title") {
+                Text(
+                    text = "하는 중",
+                    style = TodoTheme.typography.semiBold,
+                    color = TodoTheme.colors.onBackground
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+            }
+            if (uiState.todoTasks.isEmpty()) {
+                item(key = "empty todo view") {
+                    EmptyTaskView(
+                        modifier = Modifier
+                            .background(SkyBlue.copy(alpha = 0.2f))
+                            .fillMaxWidth()
+                            .padding(top = 20.dp)
+                            .height(128.dp)
+                    )
+                }
+            }
+            items(uiState.todoTasks, key = { it.id ?: UNDEFINED_ID }) { todo ->
+                TaskItem(
+                    modifier = Modifier.fillMaxWidth(),
+                    title = todo.title,
+                    status = todo.status,
+                    isFavorite = todo.isFavorite,
+                    onCompletedValueChange = {
+                        viewModel.onCompletedChanged(
+                            todo.id ?: UNDEFINED_ID,
+                            !todo.isCompleted
+                        )
+                    },
+                    onFavoriteValueChange = {
+                        viewModel.onFavoriteChanged(
+                            todo.id ?: UNDEFINED_ID,
+                            !todo.isFavorite
+                        )
+                    },
+                    onDeleteDialogShow = { viewModel.onSelectTaskToDelete(todo) }
+                )
+            }
+            if (uiState.isCompletedTaskVisible) {
+                item(key = "complete title") {
+                    Spacer(modifier = Modifier.height(36.dp))
+                    Text(
+                        text = "완료",
+                        style = TodoTheme.typography.semiBold,
+                        color = TodoTheme.colors.onBackground
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                }
+                if (uiState.completedTasks.isEmpty()) {
+                    item(key = "empty completed task view") {
+                        EmptyTaskView(
+                            modifier = Modifier
+                                .background(SkyBlue.copy(alpha = 0.2f))
+                                .fillMaxWidth()
+                                .padding(top = 20.dp)
+                                .height(128.dp)
+                        )
+                    }
+                }
+                items(uiState.completedTasks) { task ->
+                    TaskItem(
+                        modifier = Modifier.fillMaxWidth(),
+                        title = task.title,
+                        status = task.status,
+                        isFavorite = task.isFavorite,
+                        onCompletedValueChange = {
+                            viewModel.onCompletedChanged(
+                                task.id ?: UNDEFINED_ID,
+                                !task.isCompleted
+                            )
+                        },
+                        onFavoriteValueChange = {
+                            viewModel.onFavoriteChanged(
+                                task.id ?: UNDEFINED_ID,
+                                !task.isFavorite
+                            )
+                        },
+                        onDeleteDialogShow = { viewModel.onSelectTaskToDelete(task) }
+                    )
+                }
+            }
+        }
+        if (isDeleteDialogVisible) {
+            DeleteTaskDialog(
+                onDismissRequest = viewModel::onDismissDeleteDialog,
+                onConfirm = viewModel::onDeleteTask
+            )
+        }
+    }
 }
 
 @Composable
