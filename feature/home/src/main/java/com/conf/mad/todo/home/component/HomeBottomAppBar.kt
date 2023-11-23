@@ -35,7 +35,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.conf.mad.todo.designsystem.TodoTheme
 import com.conf.mad.todo.designsystem.preview.ComponentPreview
@@ -44,10 +46,13 @@ import com.conf.mad.todo.home.model.HomeMenu
 
 @Composable
 internal fun HomeBottomAppBar(currentDestination: HomeMenu, onMenuSelected: (HomeMenu) -> Unit) {
+    val onPress = remember(onMenuSelected) {
+        { onMenuSelected(HomeMenu.TASK) }
+    }
     BottomAppBar(
         actions = {
             Image(
-                painter = painterResource(
+                imageVector = ImageVector.vectorResource(
                     id = if (currentDestination == HomeMenu.TASK) {
                         R.drawable.ic_navi_task_selected
                     } else {
@@ -61,7 +66,7 @@ internal fun HomeBottomAppBar(currentDestination: HomeMenu, onMenuSelected: (Hom
                     .padding(12.dp)
             )
             Image(
-                painter = painterResource(
+                imageVector = ImageVector.vectorResource(
                     id = if (currentDestination == HomeMenu.FAVORITE) {
                         R.drawable.ic_navi_favorite_selected
                     } else {
@@ -77,12 +82,12 @@ internal fun HomeBottomAppBar(currentDestination: HomeMenu, onMenuSelected: (Hom
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { onMenuSelected(HomeMenu.POST) },
+                onClick = onPress,
                 containerColor = TodoTheme.colors.onPrimary,
                 elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_navi_add),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_navi_add),
                     contentDescription = "Task Post Button",
                     colorFilter = ColorFilter.tint(TodoTheme.colors.primary)
                 )
