@@ -67,7 +67,8 @@ fun NavGraphBuilder.homeScreen(onPost: () -> Unit) {
 
 @Composable
 fun HomeScreen(
-    onPost: () -> Unit, viewModel: HomeViewModel = hiltViewModel()
+    onPost: () -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeViewModel = remember { viewModel }
     val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
