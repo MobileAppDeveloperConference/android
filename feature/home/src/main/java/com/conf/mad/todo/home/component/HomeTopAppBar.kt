@@ -42,10 +42,7 @@ internal typealias CommonDrawable = com.conf.mad.todo.designsystem.R.drawable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun HomeTopAppBar(
-    isCompletedTaskVisible: Boolean,
-    onToggleCompletedTaskVisibility: () -> Unit
-) {
+internal fun HomeTopAppBar(isCompletedTaskVisible: Boolean, onToggleCompletedTaskVisibility: () -> Unit) {
     val onToggle = remember(onToggleCompletedTaskVisibility) {
         { onToggleCompletedTaskVisibility() }
     }
