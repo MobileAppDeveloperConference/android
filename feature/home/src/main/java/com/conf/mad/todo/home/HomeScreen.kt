@@ -66,10 +66,7 @@ fun NavGraphBuilder.homeScreen(onPost: () -> Unit) {
 }
 
 @Composable
-fun HomeScreen(
-    onPost: () -> Unit,
-    viewModel: HomeViewModel = hiltViewModel()
-) {
+fun HomeScreen(onPost: () -> Unit, viewModel: HomeViewModel = hiltViewModel()) {
     val homeViewModel = remember { viewModel }
     val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
     val isDeleteDialogVisible = remember(uiState.taskToDelete) {
