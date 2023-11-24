@@ -36,7 +36,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.conf.mad.todo.designsystem.TodoTheme
@@ -47,7 +46,7 @@ import com.conf.mad.todo.home.model.HomeMenu
 @Composable
 internal fun HomeBottomAppBar(currentDestination: HomeMenu, onMenuSelected: (HomeMenu) -> Unit) {
     val onPress = remember(onMenuSelected) {
-        { onMenuSelected(HomeMenu.TASK) }
+        { onMenuSelected(HomeMenu.POST) }
     }
     BottomAppBar(
         actions = {
