@@ -38,7 +38,7 @@ dagger-hilt = "2.48.1"
 accompanist = "0.32.0"
 material = "1.10.0"
 oss = "17.0.1"
-spotless = "6.23.0"
+spotless = "6.23.2"
 
 # test
 junit = "4.13.2"
