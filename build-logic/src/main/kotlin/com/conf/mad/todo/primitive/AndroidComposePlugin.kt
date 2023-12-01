@@ -47,7 +47,7 @@ class AndroidComposePlugin : Plugin<Project> {
                 implementation(libs.library("androidx-compose-ui-foundation"))
                 implementation(libs.library("androidx-compose-material3"))
                 implementation(libs.library("androidx-lifecycle-runtime"))
-                debugImplementation(libs.library("androidx-compose-ui-tooling"))
+                implementation(libs.library("androidx-compose-ui-tooling"))
                 debugImplementation(libs.library("androidx-compose-ui-test-manifest"))
             }
         }
