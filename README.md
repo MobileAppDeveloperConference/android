@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-Android Sample App for [Mobile App Developer Conference(MADC)](http://mad-conf.com/)
+Android Sample App for <a href="http://mad-conf.com/">Mobile App Developer Conference(MADC)</a>
 </p>
 
 <h2>Download</h2>
