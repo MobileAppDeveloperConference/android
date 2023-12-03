@@ -49,13 +49,13 @@ import com.conf.mad.todo.ui.noRippleClickable
 
 @Composable
 internal fun TaskTextField(
-    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
+    placeHolder: String,
+    modifier: Modifier = Modifier,
     singleLine: Boolean = false,
     useClearText: Boolean = false,
-    onPressClearText: () -> Unit = {},
-    placeHolder: String
+    onPressClearText: () -> Unit = {}
 ) {
     BasicTextField(
         value = value,
