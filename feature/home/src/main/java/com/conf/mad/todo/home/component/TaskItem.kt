@@ -47,13 +47,13 @@ import com.conf.mad.todo.ui.noRippleClickable
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun TaskItem(
-    modifier: Modifier = Modifier,
     title: String,
     status: TaskStatus,
     isFavorite: Boolean,
     onCompletedValueChange: () -> Unit,
     onFavoriteValueChange: () -> Unit,
-    onDeleteDialogShow: () -> Unit
+    onDeleteDialogShow: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
@@ -117,13 +117,13 @@ internal fun TaskItem(
 private fun TaskItemPreview() {
     TodoTheme {
         TaskItem(
-            modifier = Modifier.fillMaxWidth(),
             title = "Task Title",
             status = TaskStatus.DONE,
             isFavorite = false,
             onCompletedValueChange = {},
             onFavoriteValueChange = {},
-            onDeleteDialogShow = {}
+            onDeleteDialogShow = {},
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }

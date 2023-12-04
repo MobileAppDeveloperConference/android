@@ -156,7 +156,6 @@ fun HomeScreen(
             }
             items(todos, key = { it.id ?: UNDEFINED_ID }) { todo ->
                 TaskItem(
-                    modifier = Modifier.fillMaxWidth(),
                     title = todo.title,
                     status = todo.status,
                     isFavorite = todo.isFavorite,
@@ -172,7 +171,8 @@ fun HomeScreen(
                             !todo.isFavorite
                         )
                     },
-                    onDeleteDialogShow = { onSelectTaskToDelete(todo) }
+                    onDeleteDialogShow = { onSelectTaskToDelete(todo) },
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
             if (isCompletedTaskVisible) {
@@ -198,7 +198,6 @@ fun HomeScreen(
                 }
                 items(completedTasks) { task ->
                     TaskItem(
-                        modifier = Modifier.fillMaxWidth(),
                         title = task.title,
                         status = task.status,
                         isFavorite = task.isFavorite,
@@ -214,7 +213,8 @@ fun HomeScreen(
                                 !task.isFavorite
                             )
                         },
-                        onDeleteDialogShow = { onSelectTaskToDelete(task) }
+                        onDeleteDialogShow = { onSelectTaskToDelete(task) },
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
             }
