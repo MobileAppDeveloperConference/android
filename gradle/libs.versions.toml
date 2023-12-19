@@ -34,7 +34,7 @@ androidx-security = "1.1.0-alpha06"
 androidx-startup = "1.1.1"
 
 # third party
-dagger-hilt = "2.49"
+dagger-hilt = "2.50"
 accompanist = "0.32.0"
 material = "1.10.0"
 oss = "17.0.1"
