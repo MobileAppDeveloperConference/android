@@ -67,7 +67,8 @@ fun NavGraphBuilder.homeScreen(onPost: () -> Unit) {
 
 @Composable
 fun HomeScreen(onPost: () -> Unit, viewModel: HomeViewModel = hiltViewModel()) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val homeViewModel = remember { viewModel }
+    val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
     val isDeleteDialogVisible = remember(uiState.taskToDelete) {
         uiState.taskToDelete != null
     }
@@ -77,14 +78,14 @@ fun HomeScreen(onPost: () -> Unit, viewModel: HomeViewModel = hiltViewModel()) {
         currentDestination = uiState.currentDestination,
         todos = uiState.todoTasks,
         completedTasks = uiState.completedTasks,
-        onToggleCompletedTaskVisibility = viewModel::onToggleCompletedTaskVisibility,
-        onMenuSelected = viewModel::onTaskChanged,
+        onToggleCompletedTaskVisibility = homeViewModel::onToggleCompletedTaskVisibility,
+        onMenuSelected = homeViewModel::onTaskChanged,
         onPost = onPost,
-        onFavoriteChanged = viewModel::onFavoriteChanged,
-        onCompletedChanged = viewModel::onCompletedChanged,
-        onSelectTaskToDelete = viewModel::onSelectTaskToDelete,
-        onDeleteDialogDismiss = viewModel::onDismissDeleteDialog,
-        onDeleteTask = viewModel::onDeleteTask
+        onFavoriteChanged = homeViewModel::onFavoriteChanged,
+        onCompletedChanged = homeViewModel::onCompletedChanged,
+        onSelectTaskToDelete = homeViewModel::onSelectTaskToDelete,
+        onDeleteDialogDismiss = homeViewModel::onDismissDeleteDialog,
+        onDeleteTask = homeViewModel::onDeleteTask
     )
 }
 
@@ -104,6 +105,15 @@ fun HomeScreen(
     onDeleteDialogDismiss: () -> Unit,
     onDeleteTask: () -> Unit
 ) {
+    val onMenuPressed: (HomeMenu) -> Unit = remember(onMenuSelected, onPost) {
+        {
+            if (it == HomeMenu.POST) {
+                onPost()
+            } else {
+                onMenuSelected(it)
+            }
+        }
+    }
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -117,13 +127,7 @@ fun HomeScreen(
         bottomBar = {
             HomeBottomAppBar(
                 currentDestination = currentDestination,
-                onMenuSelected = {
-                    if (it != HomeMenu.POST) {
-                        onMenuSelected(it)
-                        return@HomeBottomAppBar
-                    }
-                    onPost()
-                }
+                onMenuSelected = onMenuPressed
             )
         }
     ) { paddingValues ->
