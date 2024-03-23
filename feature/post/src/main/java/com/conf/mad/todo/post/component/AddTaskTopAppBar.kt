@@ -31,7 +31,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.conf.mad.todo.designsystem.TodoTheme
 import com.conf.mad.todo.designsystem.preview.ComponentPreview
@@ -55,11 +56,11 @@ internal fun AddTaskTopAppBar(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(id = CommonDrawable.ic_add_task),
+                    imageVector = ImageVector.vectorResource(id = CommonDrawable.ic_add_task),
                     contentDescription = "Add Task Title"
                 )
                 Image(
-                    painter = painterResource(
+                    imageVector = ImageVector.vectorResource(
                         id = if (isFavorite) {
                             CommonDrawable.ic_star_filled
                         } else {
