@@ -20,8 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:OptIn(ExperimentalComposeUiApi::class)
-
 package com.conf.mad.todo.post
 
 import androidx.compose.foundation.background
@@ -35,7 +33,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
@@ -105,6 +102,18 @@ fun PostScreen(
     val isPostEnabled = remember(title) {
         title.isNotBlank()
     }
+    val onCancelPressed = remember(onKeyboardHide, onCancel) {
+        {
+            onKeyboardHide()
+            onCancel()
+        }
+    }
+    val onPostComplete = remember(onKeyboardHide, onComplete) {
+        {
+            onKeyboardHide()
+            onComplete()
+        }
+    }
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -115,14 +124,8 @@ fun PostScreen(
                 isFavorite = isFavorite,
                 isPostEnabled = isPostEnabled,
                 onPressFavorite = onFavoritePressed,
-                onCancel = {
-                    onKeyboardHide()
-                    onCancel()
-                },
-                onComplete = {
-                    onKeyboardHide()
-                    onComplete()
-                }
+                onCancel = onCancelPressed,
+                onComplete = onPostComplete
             )
         }
     ) { paddingValues ->
