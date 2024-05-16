@@ -6,10 +6,10 @@ appVersion = "1.0.0"
 versionCode = "10000"
 
 # kotlin
-kotlin = "1.9.23"
+kotlin = "1.9.24"
 kotlinx-serialization-json = "1.6.3"
 kotlinx-coroutines = "1.8.1"
-kotlinx-datetime = "0.5.0"
+kotlinx-datetime = "0.6.0"
 kotlinx-collections-immutable = "0.3.7"
 
 # java
@@ -18,16 +18,16 @@ java-poet = "1.13.0"
 
 # android
 androidx-activity = "1.8.0"
-androidx-activity-compose = "1.8.2"
+androidx-activity-compose = "1.9.0"
 androidx-appcompat = "1.6.1"
-androidx-compose-compiler = "1.5.11"
+androidx-compose-compiler = "1.5.14"
 androidx-compose-bom = "2024.05.00"
 androidx-constraint-layout = "2.1.4"
 androidx-core = "1.13.1"
 android-desugar-jdk = "2.0.4"
-androidx-fragment = "1.7.0"
+androidx-fragment = "1.7.1"
 androidx-hilt-navigation-compose = "1.2.0"
-androidx-lifecycle = "2.7.0"
+androidx-lifecycle = "2.8.0"
 androidx-navigation = "2.7.7"
 androidx-room = "2.6.1"
 androidx-security = "1.1.0-alpha06"
@@ -57,7 +57,7 @@ runner = "1.5.2"
 
 # gradle plugin
 agp = "8.4.0"
-ksp = "1.9.23-1.0.20"
+ksp = "1.9.24-1.0.20"
 ossp = "0.10.6"
 
 [libraries]
