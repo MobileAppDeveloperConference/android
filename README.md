@@ -2,8 +2,8 @@
 
 <p align="center">
     <a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/badge/License-MIT-blue.svg"/></a>
-    <img src="https://img.shields.io/badge/Kotlin-1.9.20-blue.svg?style=flat&logo=kotlin"/>
-    <img src="https://img.shields.io/badge/Compose-1.5.4-green.svg?style=flat&logo=Jetpack+Compose"/>
+    <img src="https://img.shields.io/badge/Kotlin-1.9.24-blue.svg?style=flat&logo=kotlin"/>
+    <img src="https://img.shields.io/badge/Compose-1.5.14-green.svg?style=flat&logo=Jetpack+Compose"/>
 </p>
 
 <p align="center">
