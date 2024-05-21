@@ -56,7 +56,7 @@ espressoIntents = "3.5.1"
 runner = "1.5.2"
 
 # gradle plugin
-agp = "8.4.0"
+agp = "8.4.1"
 ksp = "1.9.24-1.0.20"
 ossp = "0.10.6"
 
