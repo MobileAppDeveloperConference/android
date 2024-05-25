@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.junit5) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.spotless)
+    alias(libs.plugins.kotlin.compose.compiler) apply false
 }
 true
 

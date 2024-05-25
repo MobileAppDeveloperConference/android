@@ -21,10 +21,11 @@ java {
 }
 
 dependencies {
-    implementation(libs.kotlin.gradle.plugin)
-    implementation(libs.android.gradle.plugin)
+    compileOnly(libs.kotlin.gradle.plugin)
+    compileOnly(libs.android.gradle.plugin)
+    compileOnly(libs.kotlin.compose.compiler.gradle.plugin)
     // https://github.com/google/dagger/issues/3068#issuecomment-1470534930
-    implementation(libs.java.poet)
+    compileOnly(libs.java.poet)
 }
 
 gradlePlugin {

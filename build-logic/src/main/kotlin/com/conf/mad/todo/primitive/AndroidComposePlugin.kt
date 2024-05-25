@@ -1,39 +1,44 @@
 package com.conf.mad.todo.primitive
 
-import com.conf.mad.todo.dsl.android
-import com.conf.mad.todo.dsl.bundle
 import com.conf.mad.todo.dsl.debugImplementation
 import com.conf.mad.todo.dsl.implementation
 import com.conf.mad.todo.dsl.implementationPlatform
-import com.conf.mad.todo.dsl.kotlinOptions
 import com.conf.mad.todo.dsl.library
 import com.conf.mad.todo.dsl.libs
-import com.conf.mad.todo.dsl.testImplementation
-import com.conf.mad.todo.dsl.version
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 @Suppress("unused")
 class AndroidComposePlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
+            with(pluginManager) {
+                apply("org.jetbrains.kotlin.plugin.compose")
+            }
+
             val projectPath = rootProject.file(".").absolutePath
-            android {
-                buildFeatures.compose = true
-                composeOptions {
-                    kotlinCompilerExtensionVersion = libs.version("androidx-compose-compiler")
-                }
-                kotlinOptions {
-                    freeCompilerArgs = freeCompilerArgs + listOf(
-                        "-P",
-                        "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$projectPath/report/compose-metrics"
-                    )
-                    freeCompilerArgs = freeCompilerArgs + listOf(
-                        "-P",
-                        "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$projectPath/report/compose-reports"
+
+            extensions.getByType<KotlinAndroidProjectExtension>().apply {
+                compilerOptions {
+                    freeCompilerArgs.set(
+                        freeCompilerArgs.getOrElse(emptyList()) + listOf(
+                            "-P",
+                            "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$projectPath/report/compose-metrics"
+                        ) + listOf(
+                            "-P",
+                            "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$projectPath/report/compose-reports"
+                        )
                     )
                 }
+            }
+
+            extensions.getByType<ComposeCompilerGradlePluginExtension>().apply {
+                enableStrongSkippingMode.set(true)
+                includeSourceInformation.set(true)
             }
 
             dependencies {

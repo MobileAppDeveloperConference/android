@@ -6,10 +6,10 @@ appVersion = "1.0.0"
 versionCode = "10000"
 
 # kotlin
-kotlin = "1.9.24"
+kotlin = "2.0.0"
 kotlinx-serialization-json = "1.6.3"
 kotlinx-coroutines = "1.8.1"
-kotlinx-datetime = "0.6.0"
+kotlinx-datetime = "0.7.0"
 kotlinx-collections-immutable = "0.3.7"
 
 # java
@@ -57,7 +57,7 @@ runner = "1.5.2"
 
 # gradle plugin
 agp = "8.4.1"
-ksp = "1.9.24-1.0.20"
+ksp = "2.0.0-1.0.21"
 ossp = "0.10.6"
 
 [libraries]
@@ -69,6 +69,7 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
+kotlin-compose-compiler-gradle-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 
 # java
 java-poet = { module = "com.squareup:javapoet", version.ref = "java-poet" }
@@ -139,6 +140,7 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "junit5-plugin" }
 oss = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "ossp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 [bundles]
 compose-implementation = ["androidx-compose-ui", "androidx-compose-ui-foundation", "androidx-compose-ui-graphics", "androidx-compose-lifecycle", "androidx-compose-ui-tooling", "androidx-compose-ui-tooling-preview", "androidx-compose-material3"]
