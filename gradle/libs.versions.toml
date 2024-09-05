@@ -18,7 +18,7 @@ java-poet = "1.13.0"
 
 # android
 androidx-activity = "1.8.0"
-androidx-activity-compose = "1.9.1"
+androidx-activity-compose = "1.9.2"
 androidx-appcompat = "1.7.0"
 androidx-compose-compiler = "1.5.14"
 androidx-compose-bom = "2024.08.00"
