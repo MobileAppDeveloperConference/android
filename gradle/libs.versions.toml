@@ -29,7 +29,7 @@ androidx-hilt-navigation-compose = "1.2.0"
 androidx-lifecycle = "2.8.7"
 androidx-navigation = "2.8.9"
 androidx-room = "2.6.1"
-androidx-security = "1.1.0-alpha06"
+androidx-security = "1.1.0-alpha07"
 androidx-startup = "1.2.0"
 
 # third party
