@@ -2,7 +2,7 @@
 
 <p align="center">
     <a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/badge/License-MIT-blue.svg"/></a>
-    <img src="https://img.shields.io/badge/Kotlin-2.1.0-blue.svg?style=flat&logo=kotlin"/>
+    <img src="https://img.shields.io/badge/Kotlin-2.1.20-blue.svg?style=flat&logo=kotlin"/>
 </p>
 
 <p align="center">
@@ -20,7 +20,6 @@ the latest APK.
 - Kotlinx Libraries
     - kotlinx.coroutines
     - kotlinx.serialization
-    - kotlinx.collections.immutable
 - Jetpack
     - Startup
     - ViewModel
