@@ -32,6 +32,14 @@ android {
     }
 }
 
+kotlin {
+    compilerOptions {
+//        freeCompilerArgs.add(
+//            "-XXLanguage:+PropertyParamAnnotationDefaultTargetMode"
+//        )
+    }
+}
+
 dependencies {
     implementation(projects.core.common)
     implementation(projects.core.database)

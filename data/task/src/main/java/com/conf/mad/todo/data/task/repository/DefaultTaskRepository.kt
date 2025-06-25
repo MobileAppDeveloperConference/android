@@ -37,7 +37,7 @@ import kotlinx.coroutines.withContext
 
 class DefaultTaskRepository @Inject constructor(
     private val taskDao: TaskDao,
-    @Dispatcher(DEFAULT) private val dispatcher: CoroutineDispatcher
+    @param:Dispatcher(DEFAULT) private val dispatcher: CoroutineDispatcher
 ) : TaskRepository {
     override fun getTodoTasks(): Flow<List<Task>> {
         return taskDao.getTodoTasks().map {
