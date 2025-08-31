@@ -29,6 +29,7 @@ android {
     namespace = "com.conf.mad.todo.database"
 
     defaultConfig {
+        //noinspection WrongGradleMethod
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
