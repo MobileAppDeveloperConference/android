@@ -26,7 +26,6 @@ class AndroidKotlinPlugin : Plugin<Project> {
                         freeCompilerArgs.getOrElse(emptyList()) + listOf(
                             "-opt-in=kotlin.RequiresOptIn",
                             "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                            "-Xcontext-receivers"
                         )
                     )
                 }
