@@ -55,7 +55,7 @@ runner = "1.5.2"
 
 # gradle plugin
 agp = "8.12.2"
-ksp = "2.2.10-2.0.2"
+ksp = "2.2.20-2.0.3"
 ossp = "0.10.8"
 
 [libraries]
