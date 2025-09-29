@@ -37,7 +37,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -114,36 +114,25 @@ fun HomeScreen(
             }
         }
     }
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(TodoTheme.colors.background),
-        topBar = {
-            HomeTopAppBar(
-                isCompletedTaskVisible = isCompletedTaskVisible,
-                onToggleCompletedTaskVisibility = onToggleCompletedTaskVisibility
-            )
-        },
-        bottomBar = {
-            HomeBottomAppBar(
-                currentDestination = currentDestination,
-                onMenuSelected = onMenuPressed
-            )
-        }
-    ) { paddingValues ->
+    Scaffold(modifier = Modifier
+        .fillMaxSize()
+        .background(TodoTheme.colors.background), topBar = {
+        HomeTopAppBar(
+            isCompletedTaskVisible = isCompletedTaskVisible, onToggleCompletedTaskVisibility = onToggleCompletedTaskVisibility
+        )
+    }, bottomBar = {
+        HomeBottomAppBar(
+            currentDestination = currentDestination, onMenuSelected = onMenuPressed
+        )
+    }) { paddingValues ->
         LazyColumn(
             modifier = Modifier.padding(
-                top = paddingValues.calculateTopPadding(),
-                bottom = paddingValues.calculateBottomPadding(),
-                start = 16.dp,
-                end = 16.dp
+                top = paddingValues.calculateTopPadding(), bottom = paddingValues.calculateBottomPadding(), start = 16.dp, end = 16.dp
             )
         ) {
             item(key = "todo title") {
                 Text(
-                    text = "하는 중",
-                    style = TodoTheme.typography.semiBold,
-                    color = TodoTheme.colors.onBackground
+                    text = "하는 중", style = TodoTheme.typography.semiBold, color = TodoTheme.colors.onBackground
                 )
                 Spacer(modifier = Modifier.height(12.dp))
             }
@@ -160,32 +149,22 @@ fun HomeScreen(
             }
             items(todos, key = { it.id ?: UNDEFINED_ID }) { todo ->
                 TaskItem(
-                    title = todo.title,
-                    status = todo.status,
-                    isFavorite = todo.isFavorite,
-                    onCompletedValueChange = {
-                        onCompletedChanged(
-                            todo.id ?: UNDEFINED_ID,
-                            !todo.isCompleted
-                        )
-                    },
-                    onFavoriteValueChange = {
-                        onFavoriteChanged(
-                            todo.id ?: UNDEFINED_ID,
-                            !todo.isFavorite
-                        )
-                    },
-                    onDeleteDialogShow = { onSelectTaskToDelete(todo) },
-                    modifier = Modifier.fillMaxWidth()
+                    title = todo.title, status = todo.status, isFavorite = todo.isFavorite, onCompletedValueChange = {
+                    onCompletedChanged(
+                        todo.id ?: UNDEFINED_ID, !todo.isCompleted
+                    )
+                }, onFavoriteValueChange = {
+                    onFavoriteChanged(
+                        todo.id ?: UNDEFINED_ID, !todo.isFavorite
+                    )
+                }, onDeleteDialogShow = { onSelectTaskToDelete(todo) }, modifier = Modifier.fillMaxWidth()
                 )
             }
             if (isCompletedTaskVisible) {
                 item(key = "complete title") {
                     Spacer(modifier = Modifier.height(36.dp))
                     Text(
-                        text = "완료",
-                        style = TodoTheme.typography.semiBold,
-                        color = TodoTheme.colors.onBackground
+                        text = "완료", style = TodoTheme.typography.semiBold, color = TodoTheme.colors.onBackground
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                 }
@@ -202,31 +181,22 @@ fun HomeScreen(
                 }
                 items(completedTasks) { task ->
                     TaskItem(
-                        title = task.title,
-                        status = task.status,
-                        isFavorite = task.isFavorite,
-                        onCompletedValueChange = {
-                            onCompletedChanged(
-                                task.id ?: UNDEFINED_ID,
-                                !task.isCompleted
-                            )
-                        },
-                        onFavoriteValueChange = {
-                            onFavoriteChanged(
-                                task.id ?: UNDEFINED_ID,
-                                !task.isFavorite
-                            )
-                        },
-                        onDeleteDialogShow = { onSelectTaskToDelete(task) },
-                        modifier = Modifier.fillMaxWidth()
+                        title = task.title, status = task.status, isFavorite = task.isFavorite, onCompletedValueChange = {
+                        onCompletedChanged(
+                            task.id ?: UNDEFINED_ID, !task.isCompleted
+                        )
+                    }, onFavoriteValueChange = {
+                        onFavoriteChanged(
+                            task.id ?: UNDEFINED_ID, !task.isFavorite
+                        )
+                    }, onDeleteDialogShow = { onSelectTaskToDelete(task) }, modifier = Modifier.fillMaxWidth()
                     )
                 }
             }
         }
         if (isDeleteDialogVisible) {
             DeleteTaskDialog(
-                onDismissRequest = onDeleteDialogDismiss,
-                onConfirm = onDeleteTask
+                onDismissRequest = onDeleteDialogDismiss, onConfirm = onDeleteTask
             )
         }
     }
@@ -237,34 +207,16 @@ fun HomeScreen(
 private fun HomeScreenPreview() {
     val todos: PersistentList<TaskUiModel> = persistentListOf(
         TaskUiModel(
-            title = "투두투두투두투",
-            description = "",
-            isFavorite = true,
-            status = TaskStatus.TODO,
-            id = 0
-        ),
-        TaskUiModel(
-            title = "투두투두투두투",
-            description = "",
-            isFavorite = true,
-            status = TaskStatus.DONE,
-            id = 1
+            title = "투두투두투두투", description = "", isFavorite = true, status = TaskStatus.TODO, id = 0
+        ), TaskUiModel(
+            title = "투두투두투두투", description = "", isFavorite = true, status = TaskStatus.DONE, id = 1
         )
     )
     val completedTasks: PersistentList<TaskUiModel> = persistentListOf(
         TaskUiModel(
-            title = "투두투두투두투",
-            description = "",
-            isFavorite = true,
-            status = TaskStatus.COMPLETED,
-            id = 2
-        ),
-        TaskUiModel(
-            title = "투두투두투두투",
-            description = "",
-            isFavorite = true,
-            status = TaskStatus.COMPLETED,
-            id = 3
+            title = "투두투두투두투", description = "", isFavorite = true, status = TaskStatus.COMPLETED, id = 2
+        ), TaskUiModel(
+            title = "투두투두투두투", description = "", isFavorite = true, status = TaskStatus.COMPLETED, id = 3
         )
     )
     TodoTheme {
@@ -281,7 +233,6 @@ private fun HomeScreenPreview() {
             onCompletedChanged = { _, _ -> },
             onSelectTaskToDelete = {},
             onDeleteDialogDismiss = {},
-            onDeleteTask = {}
-        )
+            onDeleteTask = {})
     }
 }
