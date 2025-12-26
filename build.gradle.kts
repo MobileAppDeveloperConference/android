@@ -15,17 +15,13 @@ plugins {
 
 subprojects {
     apply(
-        plugin =
-            rootProject.libs.plugins.spotless
-                .get()
-                .pluginId,
+        plugin = rootProject.libs.plugins.spotless.get().pluginId,
     )
     extensions.configure<SpotlessExtension> {
         kotlin {
             target("**/*.kt")
             targetExclude("${layout.buildDirectory}/**/*.kt")
-            ktlint()
-                .setEditorConfigPath("${project.rootDir}/spotless/.editorconfig")
+            ktlint().setEditorConfigPath("${project.rootDir}/spotless/.editorconfig")
             licenseHeaderFile(rootProject.file("spotless/spotless.license.kt"))
             trimTrailingWhitespace()
             endWithNewline()
@@ -42,6 +38,11 @@ subprojects {
             target("**/*.xml")
             targetExclude("**/build/**/*.xml")
             licenseHeaderFile(rootProject.file("spotless/spotless.license.xml"), "(<[^!?])")
+        }
+    }
+    configurations.all {
+        resolutionStrategy {
+            force(rootProject.libs.kotlin.metadata.jvm)
         }
     }
 }
