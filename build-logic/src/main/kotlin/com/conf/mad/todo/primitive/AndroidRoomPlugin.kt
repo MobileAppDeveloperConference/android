@@ -16,21 +16,20 @@ class AndroidRoomPlugin : Plugin<Project> {
                 apply("com.google.devtools.ksp")
             }
             android {
-                defaultConfig {
-                    javaCompileOptions {
-                        annotationProcessorOptions {
-                            arguments += mapOf(
-                                "room.schemaLocation" to "$projectDir/schemas",
-                                "room.incremental" to "true"
-                            )
-                        }
+                defaultConfig.javaCompileOptions {
+                    annotationProcessorOptions {
+                        arguments += mapOf(
+                            "room.schemaLocation" to "$projectDir/schemas",
+                            "room.incremental" to "true"
+                        )
                     }
                 }
-                dependencies {
-                    implementation(libs.library("androidx-room"))
-                    ksp(libs.library("androidx-room-compiler"))
-                    implementation(libs.library("androidx-room-ktx"))
-                }
+            }
+            // The new public CommonExtension has no `dependencies` member, so add on the Project scope.
+            dependencies {
+                implementation(libs.library("androidx-room"))
+                ksp(libs.library("androidx-room-compiler"))
+                implementation(libs.library("androidx-room-ktx"))
             }
         }
     }

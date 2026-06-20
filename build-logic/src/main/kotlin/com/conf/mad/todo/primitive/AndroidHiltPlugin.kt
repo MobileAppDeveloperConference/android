@@ -19,10 +19,8 @@ class AndroidHiltPlugin : Plugin<Project> {
             }
 
             android {
-                packagingOptions {
-                    resources {
-                        excludes += "META-INF/gradle/incremental.annotation.processors"
-                    }
+                packaging.resources {
+                    excludes += "META-INF/gradle/incremental.annotation.processors"
                 }
             }
             dependencies {
