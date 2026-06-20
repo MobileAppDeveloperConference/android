@@ -14,10 +14,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 class AndroidKotlinPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            with(pluginManager) {
-                apply("org.jetbrains.kotlin.android")
-            }
-
+            // AGP 9 enables built-in Kotlin by default; the kotlin-android plugin is
+            // incompatible with the new DSL, so it is no longer applied here.
             extensions.getByType<KotlinAndroidProjectExtension>().apply {
                 compilerOptions {
                     jvmTarget.set(JvmTarget.JVM_17)
