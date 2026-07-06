@@ -32,7 +32,7 @@ androidx-room = "2.8.4"
 androidx-startup = "1.2.0"
 
 # third party
-dagger-hilt = "2.59.2"
+dagger-hilt = "2.60.1"
 accompanist = "0.36.0"
 material = "1.14.0"
 oss = "17.5.1"
